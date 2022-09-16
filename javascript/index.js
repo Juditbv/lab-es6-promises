@@ -82,93 +82,162 @@ getInstruction(
 );
 
 // Iteration 2 - using promises
-obtainInstruction("steak", 0).then((step) => {
-  document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-  obtainInstruction("steak", 1).then((step) => {
+
+obtainInstruction("steak", 0)
+  .then((step) => {
     document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-    obtainInstruction("steak", 2).then((step) => {
-      document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-      obtainInstruction("steak", 3).then((step) => {
-        document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-        obtainInstruction("steak", 4).then((step) => {
-          document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-          obtainInstruction("steak", 5).then((step) => {
-            document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-            obtainInstruction("steak", 6).then((step) => {
-              document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
-              obtainInstruction("steak", 7)
-                .then((step) => {
-                  document.querySelector(
-                    "#steak"
-                  ).innerHTML += `<li>${step}</li>`;
-                })
-                .then(() => {
-                  document.querySelector(
-                    "#steak"
-                  ).innerHTML += `<li>Stake is ready!</li>`;
-                })
-                .then(() => {
-                  document.querySelector("#steakImg").removeAttribute("hidden");
-                });
-            });
-          });
-        });
-      });
-    });
+    return obtainInstruction("steak", 1);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 2);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 3);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 4);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 5);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 6);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 7);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+    return obtainInstruction("steak", 1);
+  })
+  .then((step) => {
+    document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+  })
+  .then(() => {
+    document.querySelector("#steak").innerHTML += `<li>Stake is ready!</li>`;
+  })
+  .then(() => {
+    document.querySelector("#steakImg").removeAttribute("hidden");
   });
-});
+
+//    BAD EAMPLE
+//  .then( ( step ) => {
+//     document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//     obtainInstruction("steak", 2).then((step) => {
+//       document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//       obtainInstruction("steak", 3).then((step) => {
+//         document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//         obtainInstruction("steak", 4).then((step) => {
+//           document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//           obtainInstruction("steak", 5).then((step) => {
+//             document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//             obtainInstruction("steak", 6).then((step) => {
+//               document.querySelector("#steak").innerHTML += `<li>${step}</li>`;
+//               obtainInstruction("steak", 7)
+//                 .then((step) => {
+//                   document.querySelector(
+//                     "#steak"
+//                   ).innerHTML += `<li>${step}</li>`;
+//                 })
+//                 .then(() => {
+//                   document.querySelector(
+//                     "#steak"
+//                   ).innerHTML += `<li>Stake is ready!</li>`;
+//                 })
+//                 .then(() => {
+//                   document.querySelector("#steakImg").removeAttribute("hidden");
+//                 });
+//             });
+//           });
+//         });
+//       });
+//     });
+//   });
+// });
+// ;})
 
 // Iteration 3 using async/await
 async function makeBroccoli() {
-  try {
-    await obtainInstruction("broccoli", 0).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 1).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 2).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 3).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 4).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 5).then((step) => {
-      document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
-    });
-    await obtainInstruction("broccoli", 6)
-      .then((step) => {
-        document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  for (let itemList = 0; itemList < broccoli.length; itemList++) {
+    await obtainInstruction("broccoli", itemList)
+      .then((item) => {
+        document.querySelector("#broccoli").innerHTML += `<li>${item}</li>`;
       })
-      .then(() => {
-        document.querySelector(
-          "#broccoli"
-        ).innerHTML += `<li>Broccoli is ready!</li>`;
-      })
-      .then(() => {
-        document.querySelector("#broccoliImg").removeAttribute("hidden");
-      });
-  } catch (error) {
-    console.log(error);
+      .catch((error) => console.log(error));
   }
+  await obtainInstruction("broccoli", 6).then(() => {
+    document.querySelector(
+      "#broccoli"
+    ).innerHTML += `<li>Broccoli is ready!</li>`;
+    document.querySelector("#broccoliImg").removeAttribute("hidden");
+  });
+
+  // try {
+  //   await obtainInstruction("broccoli", 0).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 1).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 2).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 3).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 4).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 5).then((step) => {
+  //     document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //   });
+  //   await obtainInstruction("broccoli", 6)
+  //     .then((step) => {
+  //       document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+  //     })
+  //     .then(() => {
+  //       document.querySelector(
+  //         "#broccoli"
+  //       ).innerHTML += `<li>Broccoli is ready!</li>`;
+  //     })
+  //     .then(() => {
+  //       document.querySelector("#broccoliImg").removeAttribute("hidden");
+  //     });
+  // } catch (error) {
+  //   console.log(error);
+  // }
 }
 
 makeBroccoli();
 
 // Bonus 2 - Promise all
-Promise.all(brusselsSprouts).then(
-  setTimeout(() => {
-    brusselsSprouts.forEach((step) => {
-      document.querySelector(
-        "#brusselsSprouts"
-      ).innerHTML += `<li>${step}</li>`;
-    });
-    document.querySelector(
-      "#brusselsSprouts"
-    ).innerHTML += `<li>Brussels sprouts are ready!</li>`;
-    document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
-  }, 1000)
-);
+// Promise.all(brusselsSprouts).then(() => {
+//   brusselsSprouts.forEach((step) => {
+//     document.querySelector("#brusselsSprouts").innerHTML += `<li>${step}</li>`;
+//   });
+//   document.querySelector(
+//     "#brusselsSprouts"
+//   ).innerHTML += `<li>Brussels sprouts are ready!</li>`;
+//   document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+// });
+
+// in class
+const instructions = [];
+for (let i = 0; i < brusselsSprouts.length; i++) {
+  instructions.push(obtainInstruction("brusselsSprouts", i));
+}
+Promise.all(instructions).then((instruction) => {
+  instruction.forEach((step) => {
+    document.querySelector("#brusselsSprouts").innerHTML += `<li>${step}</li>`;
+  });
+  document.querySelector(
+    "#brusselsSprouts"
+  ).innerHTML += `<li>Brussels sprouts are ready!</li>`;
+  document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+});
